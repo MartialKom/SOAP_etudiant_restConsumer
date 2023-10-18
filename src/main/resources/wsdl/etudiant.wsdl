@@ -1,0 +1,38 @@
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:sch="http://www.martial.com/etudiant/dto/Etudiant" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.martial.com/etudiant/dto/Etudiant" targetNamespace="http://www.martial.com/etudiant/dto/Etudiant">
+<wsdl:types>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://www.martial.com/etudiant/dto/Etudiant">
+<xsd:simpleType name="EmailType">
+<xsd:restriction base="xsd:string">
+<xsd:pattern value="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}"/>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:element name="EtudiantDtIn">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="name" type="xsd:string"/>
+<xsd:element name="age" type="xsd:int"/>
+<xsd:element name="dateNaissance" type="xsd:date"/>
+<xsd:element name="mail" type="tns:EmailType"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="ResponseDto">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="status" type="xsd:int"/>
+<xsd:element name="id" type="xsd:int"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+</xsd:schema>
+</wsdl:types>
+<wsdl:portType name="EtudiantControler"> </wsdl:portType>
+<wsdl:binding name="EtudiantControlerSoap11" type="tns:EtudiantControler">
+<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+</wsdl:binding>
+<wsdl:service name="EtudiantControlerService">
+<wsdl:port binding="tns:EtudiantControlerSoap11" name="EtudiantControlerSoap11">
+<soap:address location="http://localhost:3200/ws"/>
+</wsdl:port>
+</wsdl:service>
+</wsdl:definitions>
